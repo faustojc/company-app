@@ -1,0 +1,12 @@
+:root {
+    font-family: HK Grotesk, sans-serif;
+}
+
+#brand {
+    font-weight: bolder;
+    letter-spacing: 2px;
+}
+
+.nav-link {
+    letter-spacing: 1px;
+}

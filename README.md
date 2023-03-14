@@ -32,3 +32,5 @@ Insert your <u>php file</u> in <code>resources/views/designs</code> folder.
 
 The layout php file is located in <code>resources/views/layouts</code>. Find the tag <code>nav</code> as header/navigation and <code>footer</code>
 for footer.
+
+The header and footer is now set. Only the content remains to be inserted.

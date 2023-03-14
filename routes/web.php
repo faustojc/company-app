@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/login', LoginController::class);
+
+Route::get('/signup', [App\Http\Livewire\SignupComponent::class, 'render']);

@@ -21,29 +21,26 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item mx-1">
+                    <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">HOME</a>
                     </li>
-                    <li class="nav-item mx-1 dropdown">
+                    <li class="nav-item mx-2 dropdown">
                         <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             CATEGORY
                         </a>
                         <div class="dropdown-menu rounded-0 animate__animated animate__fadeInUp animate__faster" aria-labelledby="categoryDropdown">
-                            <a href="#" class="dropdown-item">Straight</a>
-                            <a href="#" class="dropdown-item">Skinny</a>
-                            <a href="#" class="dropdown-item">Wide Leg</a>
                             <a href="#" class="dropdown-item">Cargo Pants</a>
-                            <a href="#" class="dropdown-item">Harem</a>
-                            <a href="#" class="dropdown-item">Sweat Pants</a>
+                            <a href="#" class="dropdown-item">Denim Jeans</a>
+                            <a href="#" class="dropdown-item">Trousers</a>
                         </div>
                     </li>
-                    <li class="nav-item mx-1">
+                    <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">MEN</a>
                     </li>
-                    <li class="nav-item mx-1">
+                    <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">WOMEN</a>
                     </li>
-                    <li class="nav-item mx-1">
+                    <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">CONTACT</a>
                     </li>
                 </ul>
@@ -55,12 +52,14 @@
                         </a>
                     </div>
                     <div class="nav-item mx-lg-3">
-                        <a href="#" class="d-lg-none d-md-inline nav-link">
-                            <i class="bi bi-cart"></i>
-                            <span class="text-sm-start ms-2 ms-lg-0 fw-bold d-md-inline d-lg-none">VIEW CART</span>
+                        <a href="#" class="d-lg-none d-md-inline nav-link bi bi-cart">
+                            <span class="text-sm-start ms-2 ms-lg-0 fw-bold d-md-inline d-lg-none">
+                                VIEW CART
+                                <span class="badge bg-danger rounded-pill">0</span>
+                            </span>
                         </a>
-                        <a href="#offcanvasCart" class="d-none d-lg-inline nav-link" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                            <i class="bi bi-cart"></i>
+                        <a href="#offcanvasCart" class="d-none d-lg-inline nav-link bi bi-cart" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                            <span class="position-absolute translate-middle badge rounded-pill bg-danger">0</span>
                         </a>
                     </div>
                 </div>
@@ -83,12 +82,12 @@
 
     <!-- footer -->
     <footer>
-        <div class="bg-body-tertiary text-muted py-5">
+        <div class="bg-body-secondary text-muted py-5">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="col-lg-5 mb-5 mb-lg-0">
                         <div class="fw-bold text-uppercase text-lg text-dark mb-3">𝐃𝐞𝐥𝐚𝐫𝐠𝐨 𝐏𝐇 ⌇ 𝐭𝐡𝐫𝐢𝐟𝐭𝐞𝐝 𝐣𝐞𝐚𝐧𝐬</div>
-                        <p>Thrift & Consignment Store collections of curated premium bottoms</p>
+                        <p class="text-muted">Thrift & Consignment Store collections of curated premium bottoms</p>
                         <ul class="list-inline">
                             <li class="list-inline-item"><a href="#" class="text-muted text-primary-hover bi bi-facebook" target="_blank"></a></li>
                             <li class="list-inline-item"><a href="#" class="text-muted text-primary-hover bi bi-twitter" target="_blank"></a></li>
@@ -96,19 +95,29 @@
                         </ul>
                     </div>
                     <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
-                        <h6 class="text-dark mb-3">SHOP</h6>
+                        <h6 class="fw-bold text-dark mb-3">SHOP</h6>
                         <ul class="list-unstyled">
                             <li><a class="text-muted text-decoration-none" href="#">For Men</a></li>
                             <li><a class="text-muted text-decoration-none" href="#">For Women</a></li>
                             <li><a class="text-muted text-decoration-none" href="#">Shop</a></li>
                         </ul>
                     </div>
+                    <div class="col">
+                        <h6 class="fw-bold text-dark mb-3">OFFERS & SALES</h6>
+                        <p class="mb-3">Enter your email to receive news for offers and sales on our products</p>
+                        <form method="post" action="#">
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control bg-transparent border-secondary rounded-0" placeholder="Your Email Address" aria-label="Your Email Address">
+                                <button class="btn btn-outline-secondary rounded-0 bi bi-send-fill" type="submit" name="subscribe_email"></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="fw-light bg-body-secondary py-4">
+        <div class="fw-light bg-dark-subtle py-4">
             <div class="container">
-                <p class="mb-md-0">© 2020 Delargo PH  All rights reserved.</p>
+                <p class="mb-md-0">© 2023 Delargo PH  All rights reserved.</p>
             </div>
         </div>
     </footer>

@@ -12,7 +12,8 @@
 }
 
 .nav-link {
-    letter-spacing: 1px;
+    font-size: 13px;
+    letter-spacing: 3px;
 }
 
 .text-primary-hover:hover {

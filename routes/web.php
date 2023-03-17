@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', LoginController::class);
-
-Route::get('/signup', [App\Http\Livewire\SignupComponent::class, 'render']);
+// Authentication for login and register
+Route::get('/login', [AuthenticateController::class, 'authLogin'])->name('login');
+Route::get('/register', [AuthenticateController::class, 'render_register'])->name('register');
+Route::post('/home', [HomeController::class, 'index'])->name('home');

@@ -16,6 +16,11 @@
     letter-spacing: 3px;
 }
 
+.form-label {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
 .text-primary-hover:hover {
     color: var(--bs-primary);
 }

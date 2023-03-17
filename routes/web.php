@@ -20,6 +20,15 @@ Route::get('/', function () {
 });
 
 // Authentication for login and register
-Route::get('/login', [AuthenticateController::class, 'authLogin'])->name('login');
-Route::get('/register', [AuthenticateController::class, 'render_register'])->name('register');
-Route::post('/home', [HomeController::class, 'index'])->name('home');
+// Login
+Route::get('/login', [AuthenticateController::class, 'view_login']);
+Route::post('/login', [AuthenticateController::class, 'authLogin'])->name('login');
+
+//Logout
+Route::get('/login', [AuthenticateController::class, 'logout'])->name('logout');
+
+// Register
+Route::get('/register', [AuthenticateController::class, 'view_register']);
+Route::post('/register', [AuthenticateController::class, 'authRegister'])->name('register');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');

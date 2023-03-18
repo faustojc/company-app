@@ -24,6 +24,12 @@
                     <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">HOME</a>
                     </li>
+                    <li class="nav-item mx-2">
+                        <a href="#" class="nav-link fw-light">TRENDING</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a href="#" class="nav-link fw-light">NEW</a>
+                    </li>
                     <li class="nav-item mx-2 dropdown">
                         <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             CATEGORY
@@ -33,12 +39,6 @@
                             <a href="#" class="dropdown-item">Denim Jeans</a>
                             <a href="#" class="dropdown-item">Trousers</a>
                         </div>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="#" class="nav-link fw-light">MEN</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="#" class="nav-link fw-light">WOMEN</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">CONTACT</a>

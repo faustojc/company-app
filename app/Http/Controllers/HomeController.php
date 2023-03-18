@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
-use Tests\Fixtures\Model;
+use Illuminate\Support\Facades\DB;
+use \Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends Controller
 {
-    public function index(mixed $data)
+    public function render(Request $request)
     {
-        $customer = ['customer' => $data];
+        $id = $request->getSession()->get('data');
 
-        return view('home', $customer);
+        $customer = DB::table('customer')->where('customer_id', $id)->get()->first();
+        $orders = DB::table('order')->where('customer_id', $id)->get()->all();
+
+        return view('home', ['customer' => $customer, 'orders' => $orders]);
     }
 }

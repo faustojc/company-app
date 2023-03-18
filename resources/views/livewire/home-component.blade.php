@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title', "Delargo PH")
-@section('username', $customer->username)
+@section('username') {{ $customer->username }} @endsection
 
 @section('orders')
     @if(empty($orders))

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Livewire\HomeComponent;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Livewire\Livewire;
 
 class AuthenticateController extends Controller
 {
@@ -75,16 +77,13 @@ class AuthenticateController extends Controller
 
             if (Auth::guard('customer')->attempt($credentials)) {
                 $request->session()->regenerate();
+                $customer_id = DB::table('customer')->where('email', $request->get('email'))->get()->value('customer_id');
 
                 if ($request->has('remember')) {
-                    $customer_id = Customer::where('email', $request->get('email'))->first();
                     Cookie::queue('remember', $customer_id, 43200);
                 }
 
-                $customer = Customer::where('email', $request->get('email'))->first();
-                $home = new HomeController();
-
-                return $home->index($customer);
+                return redirect()->route('home')->with('data', $customer_id);
             }
 
             return view('login')->with(['error' => "Email doesn't exist on our records"]);
@@ -93,10 +92,10 @@ class AuthenticateController extends Controller
         $remember = Cookie::get('remember');
 
         if (!empty($remember)) {
-            $customer = Customer::where('customer_id', $remember)->first();
+            $customer_id = DB::table('customer')->where('email', $request->get('email'))->get()->value('customer_id');
             $home = new HomeController();
 
-            return $home->index($customer);
+            return $home->index($customer_id);
         }
 
         return view('login');

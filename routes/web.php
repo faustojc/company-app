@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\HomeController;
+use App\Http\Livewire\HomeComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +32,5 @@ Route::get('/login', [AuthenticateController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthenticateController::class, 'view_register']);
 Route::post('/register', [AuthenticateController::class, 'authRegister'])->name('register');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+// Home
+Route::get('/home', [HomeComponent::class, 'render'])->name('home');

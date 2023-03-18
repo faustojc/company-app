@@ -24,28 +24,25 @@
                     </div>
                     <div class="col-12">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" id="username" name="username" class="form-control rounded-0" required>
+                        <input type="text" id="username" name="username" value="{{ old('username') }}" class="form-control rounded-0" required>
                         @if($errors->has('username'))
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback d-block">
                                 {{ $errors->first('username') }}
                             </div>
+                        @else
+                            <div class="invalid-feedback">Please enter your username</div>
                         @endif
-                        <div class="invalid-feedback">Please enter your username</div>
                     </div>
                     <div class="col-12">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-control rounded-0" required>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control rounded-0" required>
                         @if($errors->has('email'))
-                            <div class="invalid-feedback">
-                                @if($errors->has('email.unique'))
-                                    {{ $errors->first('email.unique') }}
-                                @endif
-                                @if($errors->has('email.email'))
-                                    {{ $errors->first('email.email') }}
-                                @endif
+                            <div class="invalid-feedback d-block">
+                                {{ $errors->first('email') }}
                             </div>
+                        @else
+                            <div class="invalid-feedback">Please enter your email address</div>
                         @endif
-                        <div class="invalid-feedback">Please enter your email address</div>
                     </div>
                     <div class="col-lg-6">
                         <label for="sex" class="form-label">Sex</label>

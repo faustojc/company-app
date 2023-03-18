@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
 
 class Customer extends Model implements Authenticatable
 {
@@ -25,6 +26,6 @@ class Customer extends Model implements Authenticatable
 
     public static function where(string $column, string $data): \Illuminate\Database\Eloquent\Builder
     {
-        return Customer::query()->where($column, null, $data);
+        return Customer::query()->where($column, null, $data)->first();
     }
 }

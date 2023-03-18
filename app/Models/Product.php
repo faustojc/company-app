@@ -20,4 +20,9 @@ class Product extends Model
      * @var string
      */
     protected $primaryKey = 'product_id';
+
+    public static function where(string $column, string $data): \Illuminate\Database\Eloquent\Builder
+    {
+        return Customer::query()->where($column, null, $data);
+    }
 }

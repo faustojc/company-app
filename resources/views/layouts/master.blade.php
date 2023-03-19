@@ -15,7 +15,9 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg py-3 sticky-lg-top bg-light-subtle border-bottom">
         <div class="container-fluid">
-            <a class="navbar-brand" id="brand" href="#">Delargo.ph</a>
+            <a href="#" class="flex items-center">
+                <img src="images/logo.png" alt="logo"/>
+            </a>
             <button class="navbar-toggler float-end border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>
             </button>
@@ -34,7 +36,7 @@
                         <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             CATEGORY
                         </a>
-                        <div class="dropdown-menu rounded-0 animate__animated animate__fadeInUp animate__faster" aria-labelledby="categoryDropdown">
+                        <div class="dropdown-menu rounded-0 animate__animated animate__fadeInDown animate__faster" aria-labelledby="categoryDropdown">
                             <a href="#" class="dropdown-item">Cargo Pants</a>
                             <a href="#" class="dropdown-item">Denim Jeans</a>
                             <a href="#" class="dropdown-item">Trousers</a>

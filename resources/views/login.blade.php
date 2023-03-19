@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('livewire.main-component')
 
 @section('title', 'Login')
 

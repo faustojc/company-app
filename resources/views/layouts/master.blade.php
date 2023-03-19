@@ -22,16 +22,16 @@
             <div class="collapse navbar-collapse" id="navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item mx-2">
-                        <a href="#" class="nav-link fw-light">HOME</a>
+                        <a href="{{ route('home') }}" class="nav-link fw-light">HOME</a>
                     </li>
                     <li class="nav-item mx-2 dropdown">
                         <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             CATEGORY
                         </a>
                         <div class="dropdown-menu rounded-0 animate__animated animate__fadeInUp animate__faster" aria-labelledby="categoryDropdown">
-                            <a href="#" class="dropdown-item">Cargo Pants</a>
-                            <a href="#" class="dropdown-item">Denim Jeans</a>
-                            <a href="#" class="dropdown-item">Trousers</a>
+                            <a href="{{ route('category') }}" class="dropdown-item">Cargo Pants</a>
+                            <a href="{{ route('category') }}" class="dropdown-item">Denim Jeans</a>
+                            <a href="{{ route('category') }}" class="dropdown-item">Trousers</a>
                         </div>
                     </li>
                     <li class="nav-item mx-2">

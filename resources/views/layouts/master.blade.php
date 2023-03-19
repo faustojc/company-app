@@ -9,14 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
     <!-- user-defined styles -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg py-3 sticky-lg-top bg-light-subtle border-bottom">
         <div class="container-fluid">
-            <a href="#" class="flex items-center">
-                <img src="images/logo.png" alt="logo"/>
+            <a href="#" class="navbar-brand">
+                <img src="resource/images/logo.png" alt="logo" style="width: 50px"/>
+                <span class="text-xl">Delargo.ph</span>
             </a>
             <button class="navbar-toggler float-end border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="bi bi-list"></i>

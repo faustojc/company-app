@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthenticateController;
-use App\Http\Controllers\HomeController;
+use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\ProductComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +33,9 @@ Route::get('/login', [AuthenticateController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthenticateController::class, 'view_register']);
 Route::post('/register', [AuthenticateController::class, 'authRegister'])->name('register');
 
-// Home
+// Components
 Route::get('/home', [HomeComponent::class, 'render'])->name('home');
+Route::get('/home/category', [CategoryComponent::class, 'render'])->name('category');
+
+// Product
+Route::get('/home/product/{id}', [ProductComponent::class, 'render']);

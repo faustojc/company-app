@@ -8,13 +8,13 @@ use Illuminate\Foundation\Application;
 use Livewire\Component;
 use Symfony\Component\HttpFoundation\Request;
 
-class HomeComponent extends Component
+class CategoryComponent extends Component
 {
     public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $main = new MainComponent();
         $main = $main->render_main();
 
-        return view('livewire.home-component', $main)->extends('livewire.main-component');
+        return view('livewire.category-component', $main)->extends('livewire.main-component');
     }
 }

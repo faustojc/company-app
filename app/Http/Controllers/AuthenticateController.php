@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\HomeComponent;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Livewire\Livewire;
 
 class AuthenticateController extends Controller
 {
@@ -29,6 +28,8 @@ class AuthenticateController extends Controller
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        Cache::forget('customer_id_'.auth()->id());
 
         if (Cookie::has('remember')) {
             Cookie::queue(Cookie::forget('remember'));
@@ -82,6 +83,7 @@ class AuthenticateController extends Controller
                 if ($request->has('remember')) {
                     Cookie::queue('remember', $customer_id, 43200);
                 }
+                Cache::put('customer_id', $customer_id, now()->addDays(2));
 
                 return redirect()->route('home')->with('data', $customer_id);
             }
@@ -93,9 +95,9 @@ class AuthenticateController extends Controller
 
         if (!empty($remember)) {
             $customer_id = DB::table('customer')->where('email', $request->get('email'))->get()->value('customer_id');
-            $home = new HomeController();
+            Cache::put('customer_id', $customer_id, now()->addDays(2));
 
-            return $home->index($customer_id);
+            return redirect()->route('home')->with('data', $customer_id);
         }
 
         return view('login');

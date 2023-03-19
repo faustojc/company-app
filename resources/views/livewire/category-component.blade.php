@@ -1,5 +1,5 @@
 @extends('livewire.main-component')
 
 @section('content')
-    Home
+    Category
 @endsection

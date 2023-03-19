@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('size');
             $table->string('color');
             $table->integer('price');
+            $table->string('filename');
+            $table->string('filepath');
+            $table->integer('filesize');
             $table->timestamps();
         });
     }

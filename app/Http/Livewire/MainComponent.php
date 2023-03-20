@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\DB;
+use App\Models\Customer;
+use App\Models\Order;
 use Livewire\Component;
 
 class MainComponent extends Component
@@ -15,8 +15,8 @@ class MainComponent extends Component
     {
         $id = app('customer_id');
 
-        $this->customer = DB::table('customer')->where('customer_id', $id)->get()->first();
-        $this->orders = DB::table('order')->where('customer_id', $id)->get()->all();
+        $this->customer = Customer::query()->where('customer_id', $id)->get()->first();
+        $this->orders = Order::query()->where('customer_id', $id)->get()->all();
 
         return ['customer' => $this->customer, 'orders' => $this->orders];
     }

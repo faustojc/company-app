@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthenticateController;
-use App\Http\Livewire\CategoryComponent;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\ProductController;
 use App\Http\Livewire\HomeComponent;
-use App\Http\Livewire\ProductComponent;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,14 @@ Route::post('/register', [AuthenticateController::class, 'authRegister'])->name(
 
 // Components
 Route::get('/home', [HomeComponent::class, 'render'])->name('home');
-Route::get('/home/category', [CategoryComponent::class, 'render'])->name('category');
 
-// Product
-Route::get('/home/product/{id}', [ProductComponent::class, 'render']);
+// Product and Orders
+Route::resource('/home/products', ProductController::class)
+    ->missing(function () {
+        return Redirect::route('products.index');
+    });
+
+Route::resource('/home/orders', OrdersController::class)
+    ->missing(function () {
+        return Redirect::route('orders.index');
+    });

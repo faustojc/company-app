@@ -29,7 +29,7 @@
                         <a href="{{ route('home') }}" class="nav-link fw-light">HOME</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a href="#" class="nav-link fw-light">TRENDING</a>
+                        <a href="{{ route('shop') }}" class="nav-link fw-light">TRENDING</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a href="#" class="nav-link fw-light">NEW</a>
@@ -129,7 +129,6 @@
                     <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
                         <h6 class="fw-bold text-dark mb-3">SHOP</h6>
                         <ul class="list-unstyled">
-                            <li><a class="text-muted text-decoration-none" href="#">For Men</a></li>
                             <li><a class="text-muted text-decoration-none" href="#">For Women</a></li>
                             <li><a class="text-muted text-decoration-none" href="#">Shop</a></li>
                         </ul>

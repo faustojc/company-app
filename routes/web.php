@@ -39,3 +39,7 @@ Route::get('/home/category', [CategoryComponent::class, 'render'])->name('catego
 
 // Product
 Route::get('/home/product/{id}', [ProductComponent::class, 'render']);
+
+// Shop Main
+Route::get('/shop', [ShopComponent::class, 'render'])->name('shop');
+

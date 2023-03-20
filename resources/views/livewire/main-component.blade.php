@@ -17,7 +17,7 @@
     <nav class="navbar navbar-expand-lg py-3 sticky-lg-top bg-light-subtle border-bottom">
         <div class="container-fluid">
         <a href="#" class="navbar-brand">
-                <img src="resource/images/logo.png" alt="logo" style="width: 50px"/>
+                <img src="{{ asset('resource/images/logo.png') }}" alt="logo" style="width: 50px"/>
                 <span class="navbar-brand text-xl">Delargo.ph</span>
             </a>
             <button class="navbar-toggler float-end border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,16 +29,16 @@
                         <a href="{{ route('home') }}" class="nav-link fw-light">HOME</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a href="{{ route('shop') }}" class="nav-link fw-light">TRENDING</a>
+                        <a href="{{ route('category') }}" class="nav-link fw-light">TRENDING</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a href="#" class="nav-link fw-light">NEW</a>
+                        <a href="{{ route('category') }}"  class="nav-link fw-light">NEW</a>
                     </li>
                     <li class="nav-item mx-2 dropdown">
                         <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             CATEGORY
                         </a>
-                        <div class="dropdown-menu rounded-0 animate__animated animate__fadeInUp animate__faster" aria-labelledby="categoryDropdown">
+                        <div class="dropdown-menu rounded-0 sticky-lg-top animate__animated animate__fadeInDown animate__faster" aria-labelledby="categoryDropdown">
                             <a href="{{ route('category') }}" class="dropdown-item">Cargo Pants</a>
                             <a href="{{ route('category') }}" class="dropdown-item">Denim Jeans</a>
                             <a href="{{ route('category') }}" class="dropdown-item">Trousers</a>

@@ -6,7 +6,7 @@
         <h5>Delargo.ph</h5>
         <h1><span>Best Prices</span> This Year</h1>
         <p>Offers your very comfortable time on walking and exercises. </p>
-        <button href="{{ route('shop') }}">Shop Now</button>
+        <button href="{{ route('category') }}">Shop Now</button>
     </div>
 </section>
 @endsection

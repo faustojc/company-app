@@ -10,14 +10,14 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
     <!-- user-defined styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    
+
 </head>
 <body>
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg py-3 sticky-lg-top bg-light-subtle border-bottom">
         <div class="container-fluid">
         <a href="#" class="navbar-brand">
-                <img src="resource/images/logo.png" alt="logo" style="width: 50px"/>
+                <img src="{{ asset('resource/images/logo.png') }}" alt="logo" style="width: 50px"/>
                 <span class="navbar-brand text-xl">Delargo.ph</span>
             </a>
             <button class="navbar-toggler float-end border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,13 +35,13 @@
                         <a href="#" class="nav-link fw-light">NEW</a>
                     </li>
                     <li class="nav-item mx-2 dropdown">
-                        <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a href="#categoryDropdown" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             CATEGORY
                         </a>
                         <div class="dropdown-menu rounded-0 animate__animated animate__fadeInUp animate__faster" aria-labelledby="categoryDropdown">
-                            <a href="{{ route('category') }}" class="dropdown-item">Cargo Pants</a>
-                            <a href="{{ route('category') }}" class="dropdown-item">Denim Jeans</a>
-                            <a href="{{ route('category') }}" class="dropdown-item">Trousers</a>
+                            <a href="{{ route('products.index') }}" class="dropdown-item">Cargo Pants</a>
+                            <a href="{{ route('products.index') }}" class="dropdown-item">Denim Jeans</a>
+                            <a href="{{ route('products.index') }}" class="dropdown-item">Trousers</a>
                         </div>
                     </li>
                     <li class="nav-item mx-2">
@@ -72,14 +72,14 @@
                         @endauth
                     </div>
                     <div class="nav-item mx-lg-3">
-                        <a href="#" class="nav-link d-lg-none d-md-inline">
+                        <a href="@if(Auth::guard('customer')->check()) {{ route('orders.index') }} @else {{ route('login') }} @endif" class="nav-link d-lg-none d-md-inline">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
                                 <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                             </svg>
                             <span class="text-sm-start ms-2 ms-lg-0 fw-bold">
-                                    VIEW CART
-                                    <span class="badge bg-danger rounded-pill">0</span>
-                                </span>
+                                VIEW CART
+                                <span class="badge bg-danger rounded-pill">0</span>
+                            </span>
                         </a>
                         <a href="#offcanvasCart" class="d-none d-lg-inline" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
@@ -99,18 +99,24 @@
             <button class="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            @if(empty($orders))
-                <div>You don't have any cart lists</div>
+            @if(Auth::guard('customer')->check())
+                @if(empty($orders))
+                    <div>You don't have any cart lists</div>
+                @else
+                    @foreach($orders as $order)
+                        <div> {{ $order->name }} </div>
+                    @endforeach
+                @endif
             @else
-                @foreach($orders as $order)
-                    <div> {{ $order->name }} </div>
-                @endforeach
+                <div>Login or register to add your carts</div>
             @endif
         </div>
     </div>
 
     <!-- content -->
-    <div class="container">@yield('content')</div>
+    <div class="container">
+        @yield('content')
+    </div>
 
     <!-- footer -->
     <footer>

@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -21,8 +23,13 @@ class Product extends Model
      */
     protected $primaryKey = 'product_id';
 
-    public static function where(string $column, string $data): \Illuminate\Database\Eloquent\Builder
+    protected $fillable = ['name', 'description', 'category', 'size', 'color', 'price'];
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
     {
-        return Customer::query()->where($column, null, $data);
+        return 'slug';
     }
 }

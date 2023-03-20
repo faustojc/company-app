@@ -23,9 +23,4 @@ class Customer extends Model implements Authenticatable
      * @var string
      */
     protected $primaryKey = 'customer_id';
-
-    public static function where(string $column, string $data): Builder
-    {
-        return Customer::query()->where($column, null, $data)->first();
-    }
 }

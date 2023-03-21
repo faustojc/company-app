@@ -57,9 +57,7 @@
         <div class="d-flex flex-wrap justify-content-center mx-100">
             <div class="d-flex flex-column align-items-center p-2">
                 <div class="mb-2 pb-3">
-                    <a href="{{ route('products.index') }}">
-                        <img src="{{ asset('resource/images/delargo-model.jpg') }}" class="img-fluid" alt="" />
-                    </a>
+                    <img src="{{ asset('resource/images/delargo-model.jpg') }}" class="img-fluid" alt="" />
                 </div>
                 <div class="mb-2">
                     <h6 class="text-uppercase sub-title">Pants</h6>

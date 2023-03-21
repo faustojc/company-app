@@ -16,12 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('description');
             $table->string('category');
+            $table->string('category');
             $table->string('size');
-            $table->string('color');
             $table->integer('price');
             $table->string('filename');
             $table->string('filepath');
-            $table->integer('filesize');
             $table->timestamps();
         });
     }

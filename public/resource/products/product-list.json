@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Baggy Cargo",
+        "description": "MOST FAVORITE HOLY GRAIL, 8pockets, premium durable quality, khaki color, all over pinterest, grab this while you can.",
+        "category": "Cargo",
+        "flaw": "1 missing zipper puller, will have replaced before shipping!",
+        "size": "waist: 12.5 - 14.5' adjustable",
+        "price": 1349,
+        "filename": "baggy-cargo.jpg",
+        "filepath": "http://127.0.0.1:8000/resource/products/"
+    },
+    {
+        "name": "Baggy Camo Cargo",
+        "description": "HOLY GRAIL, 9pockets, premium quality, garterized waist + adjustable tie inside, definitely a must have, WORTH IT AF.",
+        "category": "Cargo",
+        "flaw": "",
+        "size": "waist: 14.5 - 17' adjustable",
+        "price": 1349,
+        "filename": "baggy-cargo-camo.jpg",
+        "filepath": "http://127.0.0.1:8000/resource/products/"
+    },
+    {
+        "name": "Parachute Cargo",
+        "description": "A crowd’s favorite, holy grail!, very adjustable waist, extremely baggy, all over pinterest, a rare piece, good quality, WORTH IT.",
+        "category": "Cargo",
+        "flaw": "",
+        "size": "waist: 12 - 17' adjustable",
+        "price": 1299,
+        "filename": "parachute-cargo.jpg",
+        "filepath": "http://127.0.0.1:8000/resource/products/"
+    },
+    {
+        "name": "Graphic Baggy Jeans",
+        "description": "Crowd’s favorite, the overall graphics front & back with studs are the coolest!, a rare piece, minimal distressing, high quality denim, WORTH IT AF.",
+        "category": "Denim",
+        "flaw": "Small dot stain at front right thigh + stain at back left thigh part unnoticeable ww! also slightly distressed at back leg opening part!",
+        "size": "waist: 15",
+        "price": 849,
+        "filename": "graphic-baggy-jeans.jpg",
+        "filepath": "http://127.0.0.1:8000/resource/products/"
+    },
+    {
+        "name": "Carpenter Overalls",
+        "description": "Can also fit smaller waists, has the cutest heart adjustments, sharp hq denim, all over pinterest!, def worth it.",
+        "category": "Denim",
+        "flaw": "Rust at the right adjustment part",
+        "size": "waist: 17",
+        "price": 799,
+        "filename": "carpenter-overalls.jpg",
+        "filepath": "http://127.0.0.1:8000/resource/products/"
+    },
+    {
+        "name": "Baggy Jeans",
+        "description": "Saurrr pretty & fits like a glove, good quality denim, a staple piece u need, in pristine condition, will keep if unsold.",
+        "category": "Denim",
+        "flaw": "Stain on the inside waistband unnoticeable ww!",
+        "size": "waist: 12",
+        "price": 699,
+        "filename": "baggy-jeans.jpg",
+        "filepath": "http://127.0.0.1:8000/resource/products/"
+    }
+]

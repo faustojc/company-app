@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Livewire\MainComponent;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
@@ -36,7 +35,7 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        return view('products.edit', $product)->extends('livewire.main-component');
+        return view('products.edit', [$product])->extends('livewire.main-component');
     }
 
     public function update(Request $request, Product $product)

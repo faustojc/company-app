@@ -23,13 +23,5 @@ class Product extends Model
      */
     protected $primaryKey = 'product_id';
 
-    protected $fillable = ['name', 'description', 'category', 'size', 'color', 'price'];
-
-    /**
-     * Get the route key for the model.
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
+    protected $fillable = ['name', 'description', 'category', 'flaw', 'size', 'color', 'price'];
 }

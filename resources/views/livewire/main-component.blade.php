@@ -41,7 +41,6 @@
                         <div class="dropdown-menu rounded-0 animate__animated animate__fadeInUp animate__faster" aria-labelledby="categoryDropdown">
                             <a href="{{ route('products.index') }}" class="dropdown-item">Cargo Pants</a>
                             <a href="{{ route('products.index') }}" class="dropdown-item">Denim Jeans</a>
-                            <a href="{{ route('products.index') }}" class="dropdown-item">Trousers</a>
                         </div>
                     </li>
                     <li class="nav-item mx-2">
@@ -114,7 +113,7 @@
     </div>
 
     <!-- content -->
-    <div class="container">
+    <div class="container-fluid">
         @yield('content')
     </div>
 

@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,10 +14,16 @@ class HomeComponent extends Component
 {
     public function render(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $main = new MainComponent();
-        $main = $main->render_main();
+        $id = app('customer_id');
+
+        $customer = Customer::query()->where('customer_id', $id)->first();
+        $orders = Order::query()->where('customer_id', $id)->get();
         $products = Product::query()->get()->all();
 
-        return view('livewire.home-component', $main)->with('products', $products)->extends('livewire.main-component');
+        return view('livewire.home-component')
+            ->with('customer', $customer)
+            ->with('orders', $orders)
+            ->with('products', $products)
+            ->extends('livewire.main-component');
     }
 }

@@ -4,20 +4,25 @@ namespace App\Http\Livewire;
 
 use App\Models\Customer;
 use App\Models\Order;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Livewire\Component;
 
 class MainComponent extends Component
 {
-    public mixed $customer;
-    public array $orders;
+    public $customer;
+    public $orders;
 
-    public function render_main(): array
+    public function render_main(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $id = app('customer_id');
 
-        $this->customer = Customer::query()->where('customer_id', $id)->get()->first();
-        $this->orders = Order::query()->where('customer_id', $id)->get()->all();
+        $this->customer = Customer::query()->where('customer_id', $id)->first();
+        $this->orders = Order::query()->where('customer_id', $id)->get();
 
-        return ['customer' => $this->customer, 'orders' => $this->orders];
+        return view('livewire.main-component')
+            ->with('customer', $this->customer)
+            ->with('orders', $this->orders);
     }
 }

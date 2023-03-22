@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="row w-100 px-5 m-0 hero">
-        <div class="col-lg col-sm-12 py-lg-0 py-sm-5">
+        <div class="col-lg col-sm-12 py-lg-0 py-5">
             <div class="row align-items-center justify-content-lg-start justify-content-sm-center align-content-center h-100">
                 <div class="col-12 text-center text-lg-start">
                     <p class="text-uppercase sub-title">THRIFTED JEANS</p>
@@ -30,25 +30,27 @@
                 <div class="col-12 text-center">
                     <h2 class="title">Popular Pants</h2>
                 </div>
-                <div class="row flex-wrap g-3">
+                <div class="d-flex flex-wrap justify-content-center pt-5">
+
                     @foreach($products as $index => $product)
                         @if($index >= 4) @break
                         @endif
-                        <div class="col flex-column">
-                            <a href="{{ route('products.show', $product) }}" class="">
-                                <img src="{{ $product->filepath . $product->filename }}" class="img-fluid mb-2" alt="{{ $product->name }}" />
+                        <div class="card rounded-0 mx-2 mb-4" style="width: 19rem">
+                            <a href="{{ route('products.show', $product) }}">
+                                <img src="{{ $product->filepath . $product->filename }}" class="card-img-top mb-2" alt="{{ $product->name }}" />
                             </a>
-                            <div class="px-4">
-                                <p class="text-uppercase m-0 sub-title">{{ $product->category }}</p>
+                            <div class="card-body">
+                                <p class="card-title text-uppercase m-0 sub-title">{{ $product->category }}</p>
                                 <a href="{{ route('products.show', $product) }}" class="fw-bold text-body product-name text-decoration-none">{{ $product->name }}</a>
-                                <p class="fw-bolder text-success sub-title">P{{ $product->price }}.00</p>
+                                <p class="text-success sub-title">P{{ $product->price }}.00</p>
+                                <a href="{{ route('products.show', $product) }}" class="btn btn-outline-secondary rounded-0 text-uppercase px-2 py-1">
+                                    <span class="bi bi-cart me-2"></span>
+                                    Add to Cart
+                                </a>
                             </div>
-                            <a href="@if(Auth::guard('customer')->check()) {{ route('products.show', $product) }} @else {{ route('login') }} @endif" class="btn btn-outline-secondary rounded-0 text-uppercase px-3 py-2">
-                                <span class="bi bi-cart me-2"></span>
-                                Add to Cart
-                            </a>
                         </div>
                     @endforeach
+
                 </div>
             </div>
         </div>
@@ -70,7 +72,7 @@
                 </div>
             </div>
             <div class="m-2">
-                <img src="{{ asset('resource/images/delargo-model1.jpg') }}" class="img-fluid h-100" alt="">
+                <img src="{{ asset('resource/images/delargo-model1.jpg') }}" class="img-fluid" alt="">
             </div>
         </div>
     </section>

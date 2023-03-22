@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -23,5 +20,5 @@ class Product extends Model
      */
     protected $primaryKey = 'product_id';
 
-    protected $fillable = ['name', 'description', 'category', 'flaw', 'size', 'color', 'price'];
+    protected $fillable = ['name', 'description', 'category', 'flaw', 'size', 'price'];
 }

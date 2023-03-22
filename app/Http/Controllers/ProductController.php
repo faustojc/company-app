@@ -16,7 +16,10 @@ class ProductController extends Controller
         $orders = Order::query()->where('customer_id', app('customer_id'))->get()->all();
         $products = Product::all();
 
-        return view('products.index', $products)->with('customer', $customer)->with('orders', $orders)->extends('livewire.main-component');
+        return view('products.index', $products)
+            ->with('customer', $customer)
+            ->with('orders', $orders)
+            ->extends('livewire.main-component');
     }
 
     public function create()
@@ -24,37 +27,21 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(Request $request, Products $product)
+    public function store(Request $request)
     {
-        if ($request->isMethod("POST")) {
-            $request->validate([
-                'id' => 'unique:product,id'
-            ]);
-
-            $order = new Order();
-            $order->customer_id = app('customer_id');
-            $order->product_id = $product->id;
-            $order->total_price = $product->price;
-            $order->save();
-
-            $products = Product::all();
-
-            $home = new HomeComponent();
-
-            return view($home->render());
-        }
-
-        dd($product);
-
-        return view('products.store', $product)->extends('livewire.main-component');
+        return view('products.store')->extends('livewire.main-component');
     }
 
     public function show(Product $product)
     {
-        $customer = Customer::query()->where('customer_id', app('customer_id'))->get()->first();
+        $customer = Customer::query()->where('customer_id', app('customer_id'))->first();
         $orders = Order::query()->where('customer_id', app('customer_id'))->get()->all();
 
-        return view('products.show')->with('product', $product)->with('customer', $customer)->with('$orders', $orders)->extends('livewire.main-component');
+        return view('products.show')
+            ->with('product', $product)
+            ->with('customer', $customer)
+            ->with('$orders', $orders)
+            ->extends('livewire.main-component');
     }
 
     public function edit(Product $product)

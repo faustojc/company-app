@@ -77,7 +77,9 @@
                             </svg>
                             <span class="text-sm-start ms-2 ms-lg-0 fw-bold">
                                 VIEW CART
-                                <span class="badge bg-danger rounded-pill">0</span>
+                                <span class="badge bg-danger rounded-pill">
+                                    0
+                                </span>
                             </span>
                         </a>
                         <a href="#offcanvasCart" class="d-none d-lg-inline" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">

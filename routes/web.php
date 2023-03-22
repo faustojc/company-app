@@ -44,6 +44,7 @@ Route::resource('/home/products', ProductController::class)
     });
 
 Route::resource('/home/orders', OrdersController::class)
+    ->except(['update'])
     ->missing(function () {
         return Redirect::route('orders.index');
     });

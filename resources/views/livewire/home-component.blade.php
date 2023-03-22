@@ -1,16 +1,6 @@
 @extends('livewire.main-component')
 
 @section('content')
-<<<<<<< HEAD
-<section id="home" class="bg-no-repeat object-cover bg-top" style="background-image: url('resource/images/bkg.jpg');">
-    <div class="container">
-        <h5>Delargo.ph</h5>
-        <h1><span>Best Prices</span> This Year</h1>
-        <p>Offers your very comfortable time on walking and exercises. </p>
-        <button>Shop Now</button>
-    </div>
-</section>
-=======
     <section class="row w-100 px-5 m-0 hero">
         <div class="col-lg col-sm-12 py-lg-0 py-sm-5">
             <div class="row align-items-center justify-content-lg-start justify-content-sm-center align-content-center h-100">
@@ -84,5 +74,4 @@
             </div>
         </div>
     </section>
->>>>>>> 558f81bf38c6acde46bf284874ac8fe7f663527d
 @endsection

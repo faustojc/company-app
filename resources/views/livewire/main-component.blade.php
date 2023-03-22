@@ -113,13 +113,9 @@
     </div>
 
     <!-- content -->
-<<<<<<< HEAD
-    <div>@yield('content')</div>
-=======
     <div class="container-fluid">
         @yield('content')
     </div>
->>>>>>> 558f81bf38c6acde46bf284874ac8fe7f663527d
 
     <!-- footer -->
     <footer>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
+use App\Controller\HomeComponent;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -38,15 +39,22 @@ class ProductController extends Controller
 
             $products = Product::all();
 
-            return view([HomeComponent::class, 'render']);
+            $home = new HomeComponent();
+
+            return view($home->render());
         }
+
+        dd($product);
 
         return view('products.store', $product)->extends('livewire.main-component');
     }
 
     public function show(Product $product)
     {
-        return view('products.show', $product)->extends('livewire.main-component');
+        $customer = Customer::query()->where('customer_id', app('customer_id'))->get()->first();
+        $orders = Order::query()->where('customer_id', app('customer_id'))->get()->all();
+
+        return view('products.show')->with('product', $product)->with('customer', $customer)->with('$orders', $orders)->extends('livewire.main-component');
     }
 
     public function edit(Product $product)

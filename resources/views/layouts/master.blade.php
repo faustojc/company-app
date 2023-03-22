@@ -31,7 +31,7 @@
                         <a href="#" class="nav-link fw-light">TRENDING</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a href="#" class="nav-link fw-light">NEW</a>
+                        <a href="#" class="nav-link fw-light">NEWq</a>
                     </li>
                     <li class="nav-item mx-2 dropdown">
                         <a href="#" class="nav-link fw-light dropdown-toggle" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">

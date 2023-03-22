@@ -7,7 +7,7 @@
             <hr>
             <p>Here you can check out our new products with fair price on Delargo.ph</p>
     	</div> 
-        <div onclick="window.location.href='singleproduct.html';"class="row mx-auto container-fluid">
+        <div onclick="window.location.href='singleproduct.html';" class="row mx-auto container-fluid">
             <div class="product text-center col-lg-3 col-md-4 col-12">
                 <img src="{{ asset('resource/images/flaredCargo.png') }}" width="300" height="350" alt="">
                 <div class="star">

@@ -23,9 +23,25 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Products $product)
     {
-        return view('products.store');
+        if ($request->isMethod("POST")) {
+            $request->validate([
+                'id' => 'unique:product,id'
+            ]);
+
+            $order = new Order();
+            $order->customer_id = app('customer_id');
+            $order->product_id = $product->id;
+            $order->total_price = $product->price;
+            $order->save();
+
+            $products = Product::all();
+
+            return view([HomeComponent::class, 'render']);
+        }
+
+        return view('products.store', $product)->extends('livewire.main-component');
     }
 
     public function show(Product $product)

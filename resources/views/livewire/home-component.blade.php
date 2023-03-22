@@ -43,7 +43,7 @@
                                 <a href="{{ route('products.show', $product) }}" class="fw-bold text-body product-name text-decoration-none">{{ $product->name }}</a>
                                 <p class="fw-bolder text-success sub-title">P{{ $product->price }}.00</p>
                             </div>
-                            <a href="@if(Auth::guard('customer')->check()) {{ route('orders.store', $product) }} @else {{ route('login') }} @endif" class="btn btn-outline-secondary rounded-0 text-uppercase px-3 py-2">
+                            <a href="@if(Auth::guard('customer')->check()) {{ route('products.store', $product) }} @else {{ route('login') }} @endif" class="btn btn-outline-secondary rounded-0 text-uppercase px-3 py-2">
                                 <span class="bi bi-cart me-2"></span>
                                 Add to Cart
                             </a>

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('order_id');
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedInteger('quantity');
             $table->integer('total_price');
             $table->timestamps();
             $table->foreign('customer_id')->references('customer_id')->on('customer')->onDelete('cascade');

@@ -23,7 +23,7 @@
                     <p>Flaws: {{ $product->flaw }}</p>
                 </div>
                 <hr>
-                <form method="POST" action="{{ route('orders.store', $product)}}" class="d-flex"> @csrf
+                <form method="POST" action="{{ route('products.store', $product)}}" class="d-flex"> @csrf
                     <div class="mb-3">
                         <input type="number" id="quantity" name="quantity" value="1" min="1" max="99" class="form-control rounded-0 px-2 py-1">
                     </div>

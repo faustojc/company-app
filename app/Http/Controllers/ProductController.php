@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use App\Controller\HomeComponent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -22,31 +23,39 @@ class ProductController extends Controller
             ->extends('livewire.main-component');
     }
 
+    // For the seller
     public function create()
     {
         return view('products.create');
     }
 
+    // For the seller
     public function store(Request $request)
     {
-        return view('products.store')->extends('livewire.main-component');
+        return view('products.store');
     }
 
     public function show(Product $product)
     {
-        $customer = Customer::query()->where('customer_id', app('customer_id'))->first();
-        $orders = Order::query()->where('customer_id', app('customer_id'))->get()->all();
+        $id = app('customer_id');
+
+        $customer = Customer::query()->where('customer_id', $id)->first();
+        $customer_products_id = Order::query()->where('customer_id', $id)->pluck('product_id')->all();
+        $orders = Product::query()->whereIn('product_id', $customer_products_id)->get();
+        $relatedProducts = Product::query()->where('category', $product->category)->get()->except($product->product_id);
 
         return view('products.show')
             ->with('product', $product)
             ->with('customer', $customer)
-            ->with('$orders', $orders)
+            ->with('orders', $orders)
+            ->with('relatedProducts', $relatedProducts)
             ->extends('livewire.main-component');
     }
 
+    // For the seller
     public function edit(Product $product)
     {
-        return view('products.edit', [$product])->extends('livewire.main-component');
+        return view('products.edit', ['product' => $product]);
     }
 
     public function update(Request $request, Product $product)

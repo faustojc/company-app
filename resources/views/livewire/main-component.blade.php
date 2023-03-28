@@ -79,7 +79,7 @@
                                 VIEW CART
                                 <span class="badge bg-danger rounded-pill">
                                     @if(Auth::guard('customer')->check())
-                                        {{ $orders->count() }}
+                                        {{ $order_count }}
                                     @else
                                         0
                                     @endif
@@ -92,7 +92,7 @@
                             </svg>
                             <span class="position-absolute translate-middle badge rounded-pill bg-danger">
                                 @if(Auth::guard('customer')->check())
-                                    {{ $orders->count() }}
+                                    {{ $order_count }}
                                 @else
                                     0
                                 @endif
@@ -114,11 +114,7 @@
                 @if($orders->count() == 0)
                     <div>You don't have any cart lists</div>
                 @else
-                    @foreach($orders as $order_product)
-                        <div> {{ $order_product->name }} </div>
-                        <di> {{ $order_product->price }}</di>
-                        <hr>
-                    @endforeach
+                    @livewire('orders-component')
                 @endif
             @else
                 <div>Login or register to add your carts</div>

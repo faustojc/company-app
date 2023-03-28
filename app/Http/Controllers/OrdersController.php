@@ -24,20 +24,28 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {
-        $product = Product::query()->where('product_id', $request->query('product'))->first();
-        $hasOrder = Order::query()->where('customer_id', app('customer_id'))->where('product_id', $product->product_id);
-        $currOrder = Order::query()->where('customer_id', app('customer_id'))->where('product_id', $product->product_id)->first();
+        $customer_id = app('customer_id');
+        $product_id = $request->query('product');
+
+        $product = Product::query()->where('product_id', $product_id)->first();
+        $hasOrder = Order::query()->where('customer_id', $customer_id)->where('product_id', $product->product_id);
+        $currOrder = Order::query()->where('customer_id', $customer_id)->where('product_id', $product->product_id)->first();
 
         if ($hasOrder->exists()) {
             Order::query()
-                ->where('customer_id', app('customer_id'))
+                ->where('customer_id', $customer_id)
                 ->where('product_id', $product->product_id)
                 ->update(['quantity' => $currOrder->quantity + $request->get('quantity')]);
 
             Order::query()
-                ->where('customer_id', app('customer_id'))
+                ->where('customer_id', $customer_id)
                 ->where('product_id', $product->product_id)
                 ->update(['total_price' => $currOrder->total_price * $currOrder->quantity]);
+
+            Order::query()
+                ->where('customer_id', $customer_id)
+                ->where('product_id', $product->product_id)
+                ->update(['updated_at' => time()]);
         }
         else {
             $orderNew = new Order();

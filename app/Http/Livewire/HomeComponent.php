@@ -18,13 +18,12 @@ class HomeComponent extends Component
 
         $customer = Customer::query()->where('customer_id', $id)->first();
         $products = Product::query()->get()->all();
-        $customer_products_id = Order::query()->where('customer_id', $id)->pluck('product_id')->all();
-        $orders = Product::query()->whereIn('product_id', $customer_products_id)->get();
+        $order_count = Order::query()->where('customer_id', $id)->get()->count();
 
         return view('livewire.home-component')
             ->with('customer', $customer)
             ->with('products', $products)
-            ->with('orders', $orders)
+            ->with('orders', $order_count)
             ->extends('livewire.main-component');
     }
 }

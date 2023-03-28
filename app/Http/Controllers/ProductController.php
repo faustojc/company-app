@@ -40,14 +40,13 @@ class ProductController extends Controller
         $id = app('customer_id');
 
         $customer = Customer::query()->where('customer_id', $id)->first();
-        $customer_products_id = Order::query()->where('customer_id', $id)->pluck('product_id')->all();
-        $orders = Product::query()->whereIn('product_id', $customer_products_id)->get();
+        $order_count = Order::query()->where('customer_id', $id)->get()->count();
         $relatedProducts = Product::query()->where('category', $product->category)->get()->except($product->product_id);
 
         return view('products.show')
             ->with('product', $product)
             ->with('customer', $customer)
-            ->with('orders', $orders)
+            ->with('orders', $order_count)
             ->with('relatedProducts', $relatedProducts)
             ->extends('livewire.main-component');
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedInteger('quantity');
-            $table->integer('total_price');
+            $table->unsignedFloat('total_price');
             $table->timestamps();
             $table->foreign('customer_id')->references('customer_id')->on('customer')->onDelete('cascade');
             $table->foreign('product_id')->references('product_id')->on('product')->onDelete('cascade');

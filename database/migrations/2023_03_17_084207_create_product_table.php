@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('category');
             $table->string('size');
-            $table->integer('price');
+            $table->unsignedFloat('price');
             $table->string('filename');
             $table->string('filepath');
             $table->timestamps();

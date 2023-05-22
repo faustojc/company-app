@@ -1,9 +1,10 @@
-@extends('livewire.main-component')
+@extends('app')
 
 @section('content')
     <section class="row w-100 px-5 m-0 hero">
         <div class="col-lg col-sm-12 py-lg-0 py-5">
-            <div class="row align-items-center justify-content-lg-start justify-content-sm-center align-content-center h-100">
+            <div
+                class="row align-items-center justify-content-lg-start justify-content-sm-center align-content-center h-100">
                 <div class="col-12 text-center text-lg-start">
                     <p class="text-uppercase sub-title">THRIFTED JEANS</p>
                 </div>
@@ -17,7 +18,7 @@
         </div>
         <div class="col-lg col-sm-12 py-lg-0 pt-sm-5">
             <div class="d-flex justify-content-center">
-                <img src="{{ asset('resource/images/hero.png') }}" class="img-fluid" alt="DelargoPH" />
+                <img src="{{ asset('resource/images/hero.png') }}" class="img-fluid" alt="DelargoPH"/>
             </div>
         </div>
     </section>
@@ -33,17 +34,21 @@
                 <div class="d-flex flex-wrap justify-content-center pt-5">
 
                     @foreach($products as $index => $product)
-                        @if($index >= 4) @break
+                        @if($index >= 4)
+                            @break
                         @endif
                         <div class="card rounded-0 mx-2 mb-4" style="width: 19rem">
                             <a href="{{ route('products.show', $product) }}">
-                                <img src="{{ $product->filepath . $product->filename }}" class="card-img-top mb-2" alt="{{ $product->name }}" />
+                                <img src="{{ $product->filepath . $product->filename }}" class="card-img-top mb-2"
+                                     alt="{{ $product->name }}"/>
                             </a>
                             <div class="card-body">
                                 <p class="card-title text-uppercase m-0 sub-title">{{ $product->category }}</p>
-                                <a href="{{ route('products.show', $product) }}" class="fw-bold text-body product-name text-decoration-none">{{ $product->name }}</a>
-                                <p class="text-success sub-title">P{{ $product->price }}.00</p>
-                                <a href="{{ route('products.show', $product) }}" class="btn btn-outline-secondary rounded-0 text-uppercase px-2 py-1">
+                                <a href="{{ route('products.show', $product) }}"
+                                   class="fw-bold text-body product-name text-decoration-none">{{ $product->name }}</a>
+                                <p class="text-success sub-title">P{{ number_format($product->price) }}.00</p>
+                                <a href="{{ route('products.show', $product) }}"
+                                   class="btn btn-outline-secondary rounded-0 text-uppercase px-2 py-1">
                                     <span class="bi bi-cart me-2"></span>
                                     Add to Cart
                                 </a>
@@ -59,7 +64,7 @@
         <div class="d-flex flex-wrap justify-content-center mx-100">
             <div class="d-flex flex-column align-items-center p-2">
                 <div class="mb-2 pb-3">
-                    <img src="{{ asset('resource/images/delargo-model.jpg') }}" class="img-fluid" alt="" />
+                    <img src="{{ asset('resource/images/delargo-model.jpg') }}" class="img-fluid" alt=""/>
                 </div>
                 <div class="mb-2">
                     <h6 class="text-uppercase sub-title">Pants</h6>

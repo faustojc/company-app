@@ -2,6 +2,12 @@
     font-family: HK Grotesk, sans-serif;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 #brand {
     font-weight: bolder;
     letter-spacing: 2px;

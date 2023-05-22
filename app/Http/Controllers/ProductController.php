@@ -8,19 +8,22 @@ use App\Models\Product;
 use App\Controller\HomeComponent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
         $customer = Customer::query()->where('customer_id', app('customer_id'))->get()->first();
-        $orders = Order::query()->where('customer_id', app('customer_id'))->get()->all();
+        $orders = Order::query()->where('customer_id', app('customer_id'))->get();
         $products = Product::all();
 
-        return view('products.index', $products)
-            ->with('customer', $customer)
-            ->with('orders', $orders)
-            ->extends('livewire.main-component');
+        return Inertia::render('Product/List', [
+            'customer' => $customer,
+            'orders' => $orders,
+            'products' => $products
+        ]);
     }
 
     // For the seller
@@ -35,20 +38,20 @@ class ProductController extends Controller
         return view('products.store');
     }
 
-    public function show(Product $product)
+    public function show(Product $product): Response
     {
         $id = app('customer_id');
 
         $customer = Customer::query()->where('customer_id', $id)->first();
-        $order_count = Order::query()->where('customer_id', $id)->get()->count();
+        $orders = Order::query()->where('customer_id', $id)->get();
         $relatedProducts = Product::query()->where('category', $product->category)->get()->except($product->product_id);
 
-        return view('products.show')
-            ->with('product', $product)
-            ->with('customer', $customer)
-            ->with('orders', $order_count)
-            ->with('relatedProducts', $relatedProducts)
-            ->extends('livewire.main-component');
+        return Inertia::render('Product/Show', [
+            'customer' => $customer,
+            'orders' => $orders,
+            'product' => $product,
+            'relatedProducts' => $relatedProducts
+        ]);
     }
 
     // For the seller

@@ -6,15 +6,34 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class OrdersController extends Controller
 {
-    public function index()
+    public function index(): Response
     {
-        $customer = Customer::query()->where('customer_id', app('customer_id'))->get()->first();
-        $orders = Order::all();
+        $orders = array();
 
-        return view('orders.index', $orders)->with('customer', $customer)->extends('livewire.main-component');
+        $customer = Customer::query()->where('customer_id', app('customer_id'))->first();
+        $customer_products_id = Order::query()->where('customer_id', app('customer_id'))->pluck('product_id')->all();
+
+        $x = 0;
+        foreach ($customer_products_id as $product_id) {
+            $curr = Order::query()->where('customer_id', app('customer_id'))->where('product_id', $product_id)->get()->first();
+
+            $orders[$x]['order_id'] = $curr->order_id;
+            $orders[$x]['customer_id'] = app('customer_id');
+            $orders[$x]['product'] = Product::query()->where('product_id', $curr->product_id)->first();
+            $orders[$x]['quantity'] = $curr->quantity;
+            $orders[$x]['total_price'] = $curr->total_price;
+            ++$x;
+        }
+
+        return Inertia::render('Orders/Index', [
+            'customer' => $customer,
+            'orders' => $orders
+        ]);
     }
 
     public function create()
@@ -22,30 +41,22 @@ class OrdersController extends Controller
         return view('orders.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): Response
     {
         $customer_id = app('customer_id');
         $product_id = $request->query('product');
 
         $product = Product::query()->where('product_id', $product_id)->first();
-        $hasOrder = Order::query()->where('customer_id', $customer_id)->where('product_id', $product->product_id);
         $currOrder = Order::query()->where('customer_id', $customer_id)->where('product_id', $product->product_id)->first();
 
-        if ($hasOrder->exists()) {
+        if ($currOrder->exists()) {
             Order::query()
                 ->where('customer_id', $customer_id)
                 ->where('product_id', $product->product_id)
-                ->update(['quantity' => $currOrder->quantity + $request->get('quantity')]);
-
-            Order::query()
-                ->where('customer_id', $customer_id)
-                ->where('product_id', $product->product_id)
-                ->update(['total_price' => $currOrder->total_price * $currOrder->quantity]);
-
-            Order::query()
-                ->where('customer_id', $customer_id)
-                ->where('product_id', $product->product_id)
-                ->update(['updated_at' => time()]);
+                ->update([
+                    'quantity' => $currOrder->quantity + $request->get('quantity'),
+                    'total_price' => $currOrder->total_price * $currOrder->quantity
+                ]);
         }
         else {
             $orderNew = new Order();
@@ -71,9 +82,9 @@ class OrdersController extends Controller
         return view('orders.edit', $order);
     }
 
-    public function update(Request $request, Order $order)
+    public function update(Request $request, $order_id)
     {
-        return view('orders.update', $order)->extends('livewire.main-component');
+        return response()->json(['message' => 'Order '. $order_id . ' successfully updated']);
     }
 
     public function destroy(Order $order)

@@ -1,4 +1,4 @@
-@extends('livewire.main-component')
+@extends('app')
 
 @section('content')
     Display customer orders

@@ -3,26 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Inertia\Inertia;
+use Inertia\Response;
+use Symfony\Component\Routing\Route;
 
 class AuthenticateController extends Controller
 {
-    public function view_login()
+    public function view_login(): Response
     {
-        return view('login');
+        return Inertia::render('Auth/Login');
     }
 
-    public function view_register()
+    public function view_register(): Response
     {
-        return view('registration');
+        return Inertia::render('Auth/Registration');
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         Auth::guard('customer')->logout();
 
@@ -35,13 +40,13 @@ class AuthenticateController extends Controller
             Cookie::queue(Cookie::forget('remember'));
         }
 
-        return view('login');
+        return redirect()->route('login');
     }
 
-    public function authRegister(Request $request)
+    public function authRegister(Request $request): Response|RedirectResponse
     {
         if ($request->isMethod("POST")) {
-            $request->validate([
+            $credentials = $request->validate([
                 'username' => 'required|max:30|unique:customer,username',
                 'email' => 'required|email|unique:customer,email',
                 'password' => 'required'
@@ -51,21 +56,25 @@ class AuthenticateController extends Controller
                 'email.unique' => 'This email address is already registered on our records'
             ]);
 
-            $customer = new Customer();
-            $customer->username = $request->input('username');
-            $customer->email = $request->input('email');
-            $customer->password = Hash::make($request->input('password'));
-            $customer->firstname = $request->input('firstname');
-            $customer->lastname = $request->input('lastname');
-            $customer->sex = $request->input('sex');
-            $customer->region = $request->input('region');
-            $customer->address = $request->input('address');
-            $customer->save();
+            if (Auth::validate($credentials)) {
+                $customer = new Customer();
+                $customer->username = $request->input('username');
+                $customer->email = $request->input('email');
+                $customer->password = Hash::make($request->input('password'));
+                $customer->firstname = $request->input('firstname');
+                $customer->lastname = $request->input('lastname');
+                $customer->sex = $request->input('sex');
+                $customer->region = $request->input('region');
+                $customer->address = $request->input('address');
+                $customer->save();
 
-            return view('login');
+                return redirect()->route('login');
+            }
+
+            return Inertia::render('Auth/Registration', ['errors' => 'Something went wrong']);
         }
 
-        return view('registration');
+        return Inertia::render('Auth/Registration');
     }
 
     public function authLogin(Request $request)
@@ -78,17 +87,18 @@ class AuthenticateController extends Controller
 
             if (Auth::guard('customer')->attempt($credentials)) {
                 $request->session()->regenerate();
-                $customer_id = Customer::query()->where('email', $request->get('email'))->get()->value('customer_id');
+                $customer = Customer::query()->where('email', $request->get('email'))->first();
+                $token = $customer->createToken('customer-token')->plainTextToken;
 
                 if ($request->has('remember')) {
-                    Cookie::queue('remember', $customer_id, 43200);
+                    Cookie::queue('remember', $customer->customer_id, 43200);
                 }
-                Cache::put('customer_id', $customer_id, now()->addDays(2));
+                Cache::put('customer_id', $customer->customer_id, now()->addDays(2));
 
-                return redirect()->route('home')->with('data', $customer_id);
+                return redirect()->route('home');
             }
 
-            return view('login')->with(['error' => "Email doesn't exist on our records"]);
+            return Inertia::render('Auth/Login', ['errors' => "Email doesn't exist on our records"]);
         }
 
         $remember = Cookie::get('remember');
@@ -97,9 +107,9 @@ class AuthenticateController extends Controller
             $customer_id = Customer::query()->where('email', $request->get('email'))->get()->value('customer_id');
             Cache::put('customer_id', $customer_id, now()->addDays(2));
 
-            return redirect()->route('home')->with('data', $customer_id);
+            return redirect()->route('home');
         }
 
-        return view('login');
+        return Inertia::render('Auth/Login');
     }
 }

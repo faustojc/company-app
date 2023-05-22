@@ -1,4 +1,4 @@
-@extends('livewire.main-component')
+@extends('app')
 
 @section('title', 'Register')
 
@@ -7,7 +7,8 @@
         <div class="row justify-content-center">
             <div class="col-md-10 col-lg-5">
                 <h5 class="mb-4">SIGN UP</h5>
-                <form class="row g-3 mb-3 needs-validation" action="{{ route('register') }}" method="POST" novalidate> {{ csrf_field() }}
+                <form class="row g-3 mb-3 needs-validation" action="{{ route('register') }}" method="POST"
+                      novalidate> {{ csrf_field() }}
                     <div class="col-lg-6">
                         <label for="firstname" class="form-label">First Name</label>
                         <input type="text" id="firstname" name="firstname" class="form-control rounded-0" required>
@@ -24,7 +25,8 @@
                     </div>
                     <div class="col-12">
                         <label for="username" class="form-label">Username</label>
-                        <input type="text" id="username" name="username" value="{{ old('username') }}" class="form-control rounded-0" required>
+                        <input type="text" id="username" name="username" value="{{ old('username') }}"
+                               class="form-control rounded-0" required>
                         @if($errors->has('username'))
                             <div class="invalid-feedback d-block">
                                 {{ $errors->first('username') }}
@@ -35,7 +37,8 @@
                     </div>
                     <div class="col-12">
                         <label for="email" class="form-label">Email Address</label>
-                        <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-control rounded-0" required>
+                        <input type="email" id="email" name="email" value="{{ old('email') }}"
+                               class="form-control rounded-0" required>
                         @if($errors->has('email'))
                             <div class="invalid-feedback d-block">
                                 {{ $errors->first('email') }}
@@ -81,14 +84,20 @@
                             <option value="Davao">Davao (Region XI)</option>
                             <option value="SOCCSKSARGEN">SOCCSKSARGEN (Region XII)</option>
                             <option value="National Capital Region">National Capital Region (NCR)</option>
-                            <option value="femCordillera Administrative Regionale">Cordillera Administrative Region (CAR)</option>
-                            <option value="Bangsamoro Autonomous Region in Muslim Mindanao">Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)</option>
+                            <option value="femCordillera Administrative Regionale">Cordillera Administrative Region
+                                (CAR)
+                            </option>
+                            <option value="Bangsamoro Autonomous Region in Muslim Mindanao">Bangsamoro Autonomous Region
+                                in Muslim Mindanao (BARMM)
+                            </option>
                             <option value="Caraga">Caraga (Region XIII)</option>
                             <option value="MIMAROPA Region">MIMAROPA Region</option>
                         </select>
                     </div>
                     <div class="col-12">
-                        <button type="submit" id="submit" name="submit" class="btn btn-outline-dark rounded-0 w-100 px-3">Sign in</button>
+                        <button type="submit" id="submit" name="submit"
+                                class="btn btn-outline-dark rounded-0 w-100 px-3">Sign in
+                        </button>
                     </div>
                 </form>
                 <p class="text-center">
@@ -98,4 +107,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/form.js') }}"></script>
 @endsection

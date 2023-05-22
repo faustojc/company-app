@@ -1,4 +1,4 @@
-@extends('livewire.main-component')
+@extends('app')
 
 @section('title', 'Login')
 
@@ -28,7 +28,9 @@
                         </div>
                     </div>
                     <div class="form-group mb-3">
-                        <button type="submit" id="submit" name="submit" class="btn btn-outline-dark rounded-0 w-100 px-3">Log in</button>
+                        <button type="submit" id="submit" name="submit"
+                                class="btn btn-outline-dark rounded-0 w-100 px-3">Log in
+                        </button>
                     </div>
                     <div class="d-flex mb-3">
                         <div class="col form-check">
@@ -47,4 +49,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('script')
+    <script src="{{ asset('js/form.js') }}"></script>
 @endsection

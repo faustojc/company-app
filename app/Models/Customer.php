@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Customer extends Model implements Authenticatable
+class Customer extends Authenticatable
 {
-    use \Illuminate\Auth\Authenticatable;
+    use HasApiTokens;
 
     /**
      * The table associated with the model.

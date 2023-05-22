@@ -27,9 +27,39 @@ class ProductController extends Controller
         return view('products.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        return view('products.store')->extends('livewire.main-component');
+        $hasOrder = Order::query()->where('customer_id', app('customer_id'))->where('product_id', $product->id);
+        $customer = Customer::query()->where('customer_id', app('customer_id'))->first();
+        $orders = Order::query()->where('customer_id', app('customer_id'))->get()->all();
+
+        if ($hasOrder !== null) {
+            $orders->where('product_id', $product->id)->first()->quantity += $request->get('quantity');
+        }
+        else {
+            $order = new Order();
+            $order->customer_id = app('customer_id');
+            $order->product_id = $product->id;
+            $order->quantity = $request->get('quantity');
+            $order->total_price = $product->price * $request->get('quantity');
+
+            $total_price = $orders->sum(function ($order) use ($product) {
+                if ($order->product_id === $product->id) {
+                    return $product->price * $order->quantity;
+                }
+                return $order->total_price;
+            });
+
+            Order::query()->where('customer_id', app('customer_id'))
+                ->where('product_id', '<>', $product->id)
+                ->update(['total_price' => $total_price]);
+        }
+
+        return view('products.show')
+            ->with('product', $product)
+            ->with('customer', $customer)
+            ->with('$orders', $orders)
+            ->extends('livewire.main-component');
     }
 
     public function show(Product $product)

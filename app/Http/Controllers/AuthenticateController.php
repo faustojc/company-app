@@ -78,7 +78,7 @@ class AuthenticateController extends Controller
 
             if (Auth::guard('customer')->attempt($credentials)) {
                 $request->session()->regenerate();
-                $customer_id = DB::table('customer')->where('email', $request->get('email'))->get()->value('customer_id');
+                $customer_id = Customer::query()->where('email', $request->get('email'))->get()->value('customer_id');
 
                 if ($request->has('remember')) {
                     Cookie::queue('remember', $customer_id, 43200);
@@ -94,7 +94,7 @@ class AuthenticateController extends Controller
         $remember = Cookie::get('remember');
 
         if (!empty($remember)) {
-            $customer_id = DB::table('customer')->where('email', $request->get('email'))->get()->value('customer_id');
+            $customer_id = Customer::query()->where('email', $request->get('email'))->get()->value('customer_id');
             Cache::put('customer_id', $customer_id, now()->addDays(2));
 
             return redirect()->route('home')->with('data', $customer_id);

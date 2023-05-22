@@ -22,34 +22,43 @@ class OrdersController extends Controller
         return view('orders.create');
     }
 
-    public function store(Request $request, Product $product)
+    public function store(Request $request)
     {
-        $hasOrder = Order::query()->where('customer_id', app('customer_id'))->has($product->id);
-        $orders = Order::query()->where('customer_id', app('customer_id'))->get();
+        $customer_id = app('customer_id');
+        $product_id = $request->query('product');
 
-        if ($hasOrder) {
-            $orders->where('product_id', $product->id)->first()->quantity += $request->get('quantity');
+        $product = Product::query()->where('product_id', $product_id)->first();
+        $hasOrder = Order::query()->where('customer_id', $customer_id)->where('product_id', $product->product_id);
+        $currOrder = Order::query()->where('customer_id', $customer_id)->where('product_id', $product->product_id)->first();
+
+        if ($hasOrder->exists()) {
+            Order::query()
+                ->where('customer_id', $customer_id)
+                ->where('product_id', $product->product_id)
+                ->update(['quantity' => $currOrder->quantity + $request->get('quantity')]);
+
+            Order::query()
+                ->where('customer_id', $customer_id)
+                ->where('product_id', $product->product_id)
+                ->update(['total_price' => $currOrder->total_price * $currOrder->quantity]);
+
+            Order::query()
+                ->where('customer_id', $customer_id)
+                ->where('product_id', $product->product_id)
+                ->update(['updated_at' => time()]);
         }
         else {
-            $order = new Order();
-            $order->customer_id = app('customer_id');
-            $order->product_id = $product->id;
-            $order->quantity = $request->get('quantity');
-            $order->total_price = $product->price * $request->get('quantity');
-
-            $total_price = $orders->sum(function ($order) use ($product) {
-                if ($order->product_id === $product->id) {
-                    return $product->price * $order->quantity;
-                }
-                return $order->total_price;
-            });
-
-            Order::query()->where('customer_id', app('customer_id'))
-                ->where('product_id', '<>', $product->id)
-                ->update(['total_price' => $total_price]);
+            $orderNew = new Order();
+            $orderNew->customer_id = app('customer_id');
+            $orderNew->product_id = $product->product_id;
+            $orderNew->quantity = $request->get('quantity');
+            $orderNew->total_price = $product->price * $request->get('quantity');
+            $orderNew->save();
         }
 
-        return view('products.show', $product);
+        $product_controller = new ProductController();
+
+        return $product_controller->show($product);
     }
 
     public function show(Order $order)

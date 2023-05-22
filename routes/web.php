@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -34,8 +34,8 @@ Route::get('/login', [AuthenticateController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthenticateController::class, 'view_register']);
 Route::post('/register', [AuthenticateController::class, 'authRegister'])->name('register');
 
-// Components
-Route::get('/home', [HomeComponent::class, 'render'])->name('home');
+// Home
+Route::get('/', [HomeComponent::class, 'render'])->name('home');
 
 // Product and Orders
 Route::resource('/home/products', ProductController::class)
@@ -44,7 +44,7 @@ Route::resource('/home/products', ProductController::class)
     });
 
 Route::resource('/home/orders', OrdersController::class)
-    ->except(['update'])
+    ->except(['create' ,'update'])
     ->missing(function () {
         return Redirect::route('orders.index');
     });

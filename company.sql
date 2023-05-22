@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2023 at 11:50 PM
+-- Generation Time: Mar 25, 2023 at 04:00 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -101,10 +101,20 @@ CREATE TABLE `order` (
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `customer_id` bigint(20) UNSIGNED NOT NULL,
   `product_id` bigint(20) UNSIGNED NOT NULL,
+  `quantity` int(11) NOT NULL,
   `total_price` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`order_id`, `customer_id`, `product_id`, `quantity`, `total_price`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 3, 2698, '2023-03-24 06:45:31', '2023-03-24 22:19:19'),
+(2, 1, 3, 5, 15588, '2023-03-24 22:13:02', '2023-03-24 22:18:38'),
+(3, 1, 4, 1, 849, '2023-03-24 22:22:42', '2023-03-24 22:22:42');
 
 -- --------------------------------------------------------
 
@@ -296,7 +306,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `payment`

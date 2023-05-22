@@ -61,5 +61,5 @@ Route::post('/admin/logout', [AdminLoginController::class, 'logout'])->name('adm
 Route::get('/admin/register', [AdminRegisterController::class, 'showRegistrationForm'])->name('admin.register');
 Route::post('/admin/register', [AdminRegisterController::class, 'register']);
 
-Route::resource('/admin/dashboard', DashboardController::class);
+Route::resource('/admin/dashboard/admin_product', DashboardController::class);
 

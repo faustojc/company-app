@@ -5,15 +5,17 @@ import {Table} from "react-bootstrap";
 function Index({ products }) {
     function handleDelete(product) {
         if (confirm('Are you sure you want to delete this product?')) {
-            router.delete(route('dashboard.destroy', product));
+            router.delete('admin/dashboard/product' + product.product_id);
         }
     }
 
     return (
-        <>
+        <div className="container">
             <h1>Dashboard</h1>
 
-            <Link href={ route('dashboard.create') }>Create Product</Link>
+            <Link href={ route('admin_product.create') }>
+                <button>Create Product</button>
+            </Link>
 
             <Table striped responsive>
                 <thead>
@@ -37,7 +39,9 @@ function Index({ products }) {
                         <td>{product.size}</td>
                         <td>{product.price}</td>
                         <td>
-                            <Link href={ route('dashboard.edit', [product]) }>Edit</Link>
+                            <Link href={ route('admin_product.edit', {'admin_product': product.product_id}) }>
+                                <button>Edit</button>
+                            </Link>
 
                             {/* Add a form to handle deleting products */}
                             <button onClick={() => handleDelete(product)}>Delete</button>
@@ -46,7 +50,7 @@ function Index({ products }) {
                 ))}
                 </tbody>
             </Table>
-        </>
+        </div>
     );
 }
 

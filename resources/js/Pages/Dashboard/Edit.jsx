@@ -1,23 +1,23 @@
 import {router} from "@inertiajs/react";
-import route from "ziggy-js/src/js";
 import {Button, Form} from "react-bootstrap";
 import {useState} from "react";
+import route from "ziggy-js/src/js";
 
 function Edit({ product }) {
     const [ data, setData ] = useState({
+        product_id: product.product_id,
         name: product.name || '',
         description: product.description || '',
         category: product.category || '',
         flaw: product.flaw || '',
         size: product.size || '',
-        price: product.price || 0,
-        filename: product.filename || '',
-        filepath: product.filepath || '',
+        price: product.price || 0
     });
 
     function handleSubmit(e) {
         e.preventDefault();
-        router.put(route('dashboard.update', [data]));
+
+        router.put(route('admin_product.update', {'admin_product': data.product_id}), data);
     }
 
     function handleChange(e) {
@@ -25,15 +25,8 @@ function Edit({ product }) {
         setData((prevData) => ({ ...prevData, [id]: value }));
     }
 
-    function handleFileChange(e) {
-        const file = e.target.files[0];
-        if (file) {
-            setData((prevData) => ({ ...prevData, filename: file.name }));
-        }
-    }
-
     return (
-        <>
+        <div className="container">
             <h1>Edit Product</h1>
 
             {/* Add a form to handle editing products */}
@@ -107,20 +100,10 @@ function Edit({ product }) {
                     />
                 </Form.Group>
 
-                {/* File upload field */}
-                <Form.Group>
-                    <Form.Label htmlFor="file">File:</Form.Label>
-                    <Form.Control
-                        type="file"
-                        id="file"
-                        onChange={ handleFileChange }
-                    />
-                </Form.Group>
-
                 {/* Submit button */}
-                <Button type="submit">Create Product</Button>
+                <Button type="submit">Update the product</Button>
             </Form>
-        </>
+        </div>
     );
 }
 

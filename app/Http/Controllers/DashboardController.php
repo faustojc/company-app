@@ -31,11 +31,8 @@ class DashboardController extends Controller
             'name' => 'required',
             'description' => 'required',
             'category' => 'required',
-            'flaw' => 'required',
             'size' => 'required',
-            'price' => 'required|numeric',
-            'filename' => 'required',
-            'filepath' => 'required',
+            'price' => 'required|numeric'
         ]);
 
         // Create a new product
@@ -50,49 +47,48 @@ class DashboardController extends Controller
         $product->filepath = $request->input('filepath');
         $product->save();
 
-        return redirect()->route('dashboard.index');
+        $image = $request->file('image');
+        $imageName = $image->getClientOriginalName();
+        $image->move(public_path('resource/images'), $imageName);
+
+        return redirect()->route('admin_product.index');
     }
 
-    public function edit(Product $product): Response
+    public function edit($product_id): Response
     {
+        $product = Product::query()->where('product_id', $product_id)->first();
+
         return Inertia::render('Dashboard/Edit', [
             'product' => $product,
         ]);
     }
 
-    public function update(Request $request, Product $product): RedirectResponse
+    public function update(Request $request, $product_id): RedirectResponse
     {
         // Validate the request data
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'category' => 'required',
-            'flaw' => 'required',
-            'size' => 'required',
-            'price' => 'required|numeric',
-            'filename' => 'required',
-            'filepath' => 'required',
+            'price' => 'numeric'
         ]);
 
         // Update the product
+        $product = Product::query()->where('product_id', $product_id)->first();
+
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->category = $request->input('category');
         $product->flaw = $request->input('flaw');
         $product->size = $request->input('size');
         $product->price = $request->input('price');
-        $product->filename = $request->input('filename');
-        $product->filepath = $request->input('filepath');
         $product->save();
 
-        return redirect()->route('dashboard.index');
+        return redirect()->route('admin_product.index');
     }
 
-    public function destroy(Product $product): RedirectResponse
+    public function destroy($product_id): RedirectResponse
     {
         // Delete the product
-        $product->delete();
+        Product::query()->where('product_id', $product_id)->first()->delete();
 
-        return redirect()->route('dashboard.index');
+        return redirect()->route('admin_product.index');
     }
 }

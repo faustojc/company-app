@@ -11,43 +11,47 @@ function Register() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        router.post(route('admin.register', [name, email, password]));
+        router.post('/admin/register', {'name': name, 'email': email, 'password': password});
     };
 
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group>
-                <Form.Label htmlFor="name">Name:</Form.Label>
-                <Form.Control
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-            </Form.Group>
+        <>
+            <div className="container">
+                <Form onSubmit={handleSubmit}>
+                    <Form.Group>
+                        <Form.Label htmlFor="name">Name:</Form.Label>
+                        <Form.Control
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Form.Group>
 
-            <Form.Group>
-                <Form.Label htmlFor="email">Email:</Form.Label>
-                <Form.Control
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </Form.Group>
+                    <Form.Group>
+                        <Form.Label htmlFor="email">Email:</Form.Label>
+                        <Form.Control
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Form.Group>
 
-            <Form.Group>
-                <Form.Label htmlFor="password">Password:</Form.Label>
-                <Form.Control
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-            </Form.Group>
+                    <Form.Group>
+                        <Form.Label htmlFor="password">Password:</Form.Label>
+                        <Form.Control
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Form.Group>
 
-            <Button type="submit" value="Submit" >Register</Button>
-        </Form>
+                    <Button type="submit" value="Submit" >Register</Button>
+                </Form>
+            </div>
+        </>
     );
 }
 

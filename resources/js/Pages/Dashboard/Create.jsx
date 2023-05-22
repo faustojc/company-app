@@ -1,7 +1,7 @@
 import {router} from "@inertiajs/react";
-import route from "ziggy-js/src/js";
 import {Button, Form} from "react-bootstrap";
 import {useState} from "react";
+import route from "ziggy-js/src/js";
 
 function Create() {
     const [ product, setProduct ] = useState({
@@ -17,8 +17,29 @@ function Create() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        router.post(route('dashboard.store', [product]));
+
+        // Create a new FormData instance
+        const formData = new FormData();
+        formData.append('name', product.name);
+        formData.append('description', product.description);
+        formData.append('category', product.category);
+        formData.append('flaw', product.flaw);
+        formData.append('size', product.size);
+        formData.append('price', product.price);
+        formData.append('filename', product.filename);
+        formData.append('filepath', product.filepath);
+
+        // Append the selected file to the form data
+        const fileInput = document.querySelector('#file');
+
+        if (fileInput.files[0]) {
+            formData.append('image', fileInput.files[0]);
+        }
+
+        // Send the form data to the server
+        router.post(route('admin_product.store'), formData);
     }
+
 
     function handleChange(e) {
         const { id, value } = e.target;
@@ -39,7 +60,7 @@ function Create() {
     }
 
     return (
-        <>
+        <div className="container">
             <h1>Create Product</h1>
 
             {/* Add a form to handle creating products */}
@@ -126,7 +147,7 @@ function Create() {
                 {/* Submit button */}
                 <Button type="submit">Create Product</Button>
             </Form>
-        </>
+        </div>
     );
 }
 

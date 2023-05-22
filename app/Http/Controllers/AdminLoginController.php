@@ -27,7 +27,7 @@ class AdminLoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('dashboard');
+            return redirect()->route('admin_product.index');
         }
 
         return back()->withErrors([
@@ -42,6 +42,6 @@ class AdminLoginController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('home');
+        return redirect()->route('admin.login');
     }
 }

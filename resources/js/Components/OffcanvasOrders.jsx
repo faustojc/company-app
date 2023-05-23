@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NumericFormat } from "react-number-format";
 import axios from "axios";
 import {usePage} from "@inertiajs/react";
+import route from "ziggy-js/src/js";
 
 function Orders({ orders, customer }) {
     const [customerOrders, setCustomerOrders] = useState(orders);
@@ -31,16 +32,16 @@ function Orders({ orders, customer }) {
     return (
         <>
             {customerOrders.map(order => (
-                <div className="d-flex mb-3" key={order.order_id}>
+                <div className="d-flex mb-3" key={ order.order_id }>
                     <div className="card border-0 px-2">
                         <div className="row align-items-center g-0">
                             <div className="col-md-3">
-                                <img src={`${order.product.filepath}${order.product.filename}`} className="img-fluid" width="170" alt="" />
+                                <img src={ order.product.filepath + order.product.filename } className="img-fluid" width="170" alt="" />
                             </div>
                             <div className="col">
                                 <div className="card-body">
                                     <h6 className="card-title fw-bolder">{ order.product.name }</h6>
-                                    <p className="card-text"> <NumericFormat displayType={'text'} value={ order.product.price } prefix={"₱"} thousandSeparator={"true"}></NumericFormat> </p>
+                                    <p className="card-text"> <NumericFormat displayType={'text'} value={ order.product.price } prefix={"₱"} thousandSeparator={true}></NumericFormat> </p>
                                     <div className="d-flex">
                                         <button className="btn btn-outline-secondary bi bi-dash rounded-0" type="button" onClick={() => decrement(order)}></button>
                                         <input className="text-center form-control rounded-0 w-25" type="number" min="1" value={ order.quantity } />
@@ -61,39 +62,24 @@ function Orders({ orders, customer }) {
 
 // The function to export
 function OffcanvasOrders() {
-    const { orders, customer } = usePage().props;
+    const { auth, orders, customer } = usePage().props;
 
-    if (orders) {
-        return (
-            <>
-                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
-                    <div className="offcanvas-header">
-                        <h5 className="offcanvas-title nav-link" id="offcanvasCartLabel">CART LIST</h5>
-                        <button className="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        <Orders orders={orders} customer={customer}/>
-                    </div>
+    return (
+        <>
+            <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasCart" aria-labelledby="offcanvasCartLabel">
+                <div className="offcanvas-header">
+                    <h5 className="offcanvas-title nav-link" id="offcanvasCartLabel">CART LIST</h5>
+                    <button className="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-            </>
-        );
-    }
-    else {
-        return (
-            <>
-                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasCart"
-                     aria-labelledby="offcanvasCartLabel">
-                    <div className="offcanvas-header">
-                        <h5 className="offcanvas-title nav-link" id="offcanvasCartLabel">CART LIST</h5>
-                        <button className="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div className="offcanvas-body">
-                        You don't have any added carts
-                    </div>
+                <a href={ route('orders.index') }>
+                    <button>VIEW ALL CART</button>
+                </a>
+                <div className="offcanvas-body">
+                    {auth ? <Orders orders={orders} customer={customer} /> : 'You don\'t have any added carts'}
                 </div>
-            </>
-        );
-    }
+            </div>
+        </>
+    );
 }
 
 export default OffcanvasOrders;

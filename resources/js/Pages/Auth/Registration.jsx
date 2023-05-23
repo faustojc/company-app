@@ -1,11 +1,11 @@
 import {useState} from "react";
-import {router, usePage} from "@inertiajs/react";
+import {router} from "@inertiajs/react";
 import route from "ziggy-js/src/js";
-import Main from "@/Pages/Layouts/Main";
+import Navbar from "@/Components/Navbar";
+import OffcanvasOrders from "@/Components/OffcanvasOrders";
+import Footer from "@/Components/Footer";
 
-function Registration() {
-    const { errors } = usePage().props;
-
+function Registration({ errors }) {
     const regions = [
         'Ilocos (Region I)',
         'Cagayan Valley (Region II)',
@@ -59,12 +59,15 @@ function Registration() {
             return;
         }
 
-        router.post(route('register'), values);
+        router.post('/register', values);
     }
 
     return (
         <>
-            <Main>
+            <Navbar />
+            <OffcanvasOrders />
+
+            <div className="container-fluid">
                 <section className="h-100 py-5">
                     <div className="row justify-content-center">
                         <div className="col-md-10 col-lg-5">
@@ -126,7 +129,9 @@ function Registration() {
                         </div>
                     </div>
                 </section>
-            </Main>
+            </div>
+
+            <Footer />
         </>
     )
 }

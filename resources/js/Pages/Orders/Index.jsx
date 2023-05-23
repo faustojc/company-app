@@ -1,29 +1,44 @@
-import {Head, usePage} from "@inertiajs/react";
-import Main from "@/Pages/Layouts/Main";
+import Navbar from "@/Components/Navbar";
+import OffcanvasOrders from "@/Components/OffcanvasOrders";
+import Footer from "@/Components/Footer";
 
-function Index() {
-    const { orders } = usePage().props;
+function Index({ orders }) {
 
     return (
-        <Main>
-            <Head title="Orders" />
-            {orders.map((order) => (
-                <div key={order.id} className="card mb-3">
-                    <div className="card-body">
-                        <div className="row">
-                            <div className="col-md-6">
-                                <h5 className="card-title">{ order.product.name }</h5>
-                                <p className="card-text">{ order.product.description }</p>
-                            </div>
-                            <div className="col-md-6">
-                                <p className="card-text">Quantity: { order.quantity }</p>
-                                <p className="card-text">Total: { order.total }</p>
+        <>
+            <Navbar />
+            <OffcanvasOrders />
+
+            <div className="container-fluid">
+                <div className="d-flex flex-wrap justify-content-center pt-5">
+
+                    {orders.map((order) => (
+                        <div key={order.order_id} className="card mb-3 rounded-0" style={{maxWidth: '600px'}}>
+                            <div className="row g-0">
+                                <div className="col-md-3">
+                                    <img src={order.product.filepath + order.product.filename} className="img-fluid" alt={ order.product.name } style={{ width: '10rem' }} />
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="row g-1">
+                                        <div className="col">
+                                            <h5 className="card-title">{ order.product.name }</h5>
+                                            <p className="card-text">{ order.product.description }</p>
+                                        </div>
+                                        <div className="col">
+                                            <p className="card-text">Quantity: { order.quantity }</p>
+                                            <p className="card-text">Total: P{ parseFloat(order.total_price).toFixed(2) }</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ))}
+
                 </div>
-            ))}
-        </Main>
+            </div>
+
+            <Footer />
+        </>
     );
 }
 

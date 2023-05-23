@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 use Inertia\Response;
-use Symfony\Component\Routing\Route;
 
 class AuthenticateController extends Controller
 {
@@ -43,11 +40,11 @@ class AuthenticateController extends Controller
         return redirect()->route('login');
     }
 
-    public function authRegister(Request $request): Response|RedirectResponse
+    public function register(Request $request): Response|RedirectResponse
     {
         if ($request->isMethod("POST")) {
             $credentials = $request->validate([
-                'username' => 'required|max:30|unique:customer,username',
+                'username' => 'required|unique:customer,username',
                 'email' => 'required|email|unique:customer,email',
                 'password' => 'required'
             ], [
@@ -77,7 +74,7 @@ class AuthenticateController extends Controller
         return Inertia::render('Auth/Registration');
     }
 
-    public function authLogin(Request $request)
+    public function login(Request $request)
     {
         if ($request->isMethod("POST")) {
             $credentials = $request->validate([
@@ -88,7 +85,6 @@ class AuthenticateController extends Controller
             if (Auth::guard('customer')->attempt($credentials)) {
                 $request->session()->regenerate();
                 $customer = Customer::query()->where('email', $request->get('email'))->first();
-                $token = $customer->createToken('customer-token')->plainTextToken;
 
                 if ($request->has('remember')) {
                     Cookie::queue('remember', $customer->customer_id, 43200);

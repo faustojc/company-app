@@ -1,14 +1,14 @@
-import {Head, Link, router, usePage} from "@inertiajs/react";
+import {Head, Link, router} from "@inertiajs/react";
 import route from "ziggy-js/src/js";
-import Main from "../Layouts/Main";
+import Navbar from "@/Components/Navbar";
+import OffcanvasOrders from "@/Components/OffcanvasOrders";
 
 function Form({ product }) {
+
     function handleSubmit(e) {
         e.preventDefault();
 
-        router.post('order.store', {
-            product: product
-        });
+        router.post(route('orders.store', {'product': product.product_id}), new FormData(e.target));
     }
 
     return (
@@ -49,7 +49,9 @@ function Info({ product }) {
                     <p>Flaws: { product.flaw }</p>
                 </div>
                 <hr />
-                    <Show.Form product={ product } />
+
+                <Show.Form product={ product } />
+
             </div>
         </div>
     );
@@ -58,16 +60,16 @@ function Info({ product }) {
 function Related({ related }) {
     return (
         <div className="card rounded-0 mx-2 mb-4" style={{width: '19rem'}}>
-            <Link href={ route('products.show', related) }>
+            <Link href={ route('products.show', [related.product_id]) }>
                 <img src={ related.filepath + related.filename } className="card-img-top mb-2" alt={ related.name }/>
             </Link>
             <div className="card-body">
                 <p className="card-title text-uppercase m-0 sub-title">{ related.category }</p>
-                <Link href={ route('products.show', related) } className="fw-bold text-body product-name text-decoration-none">
+                <p className="fw-bold text-body product-name text-decoration-none">
                     { related.name }
-                </Link>
+                </p>
                 <p className="text-success sub-title">P { parseFloat(related.price).toFixed(2) } </p>
-                <Link href={ route('products.show', related) } className="btn btn-outline-secondary rounded-0 text-uppercase px-2 py-1">
+                <Link href={ route('products.show', [related.product_id]) } className="btn btn-outline-secondary rounded-0 text-uppercase px-2 py-1">
                     <span className="bi bi-cart me-2"></span>
                     Add to Cart
                 </Link>
@@ -76,32 +78,41 @@ function Related({ related }) {
     );
 }
 
-function Show() {
-    const { product, relatedProducts } = usePage().props;
+function Show({ product, relatedProducts }) {
 
     return (
-        <Main>
-            <Head title={ product.name } />
-            <section className="w-100 p-5">
-                <Show.Info product={ product } />
-            </section>
-            <section className="pt-5 w-100">
-                <div className="container">
-                    <div className="row mb-5">
-                        <div className="col-12 text-center">
-                            <h4 className="title">Related Products</h4>
-                        </div>
-                        <div className="d-flex flex-wrap justify-content-center pt-5">
-                            {relatedProducts.map(related =>
-                                <div key={ related.product_id }>
-                                    <Show.Related related={ related } />
-                                </div>
-                            )}
+        <>
+            <Head>
+                <title>{ product.name }</title>
+            </Head>
+
+            <Navbar />
+            <OffcanvasOrders />
+
+            <div className="container-fluid">
+                <section className="w-100 p-5">
+                    <Show.Info product={ product } />
+                </section>
+                <section className="pt-5 w-100">
+                    <div className="container">
+                        <div className="row mb-5">
+                            <div className="col-12 text-center">
+                                <h4 className="title">Related Products</h4>
+                            </div>
+                            <div className="d-flex flex-wrap justify-content-center pt-5">
+
+                                {relatedProducts.map(related =>
+                                    <div key={ related.product_id }>
+                                        <Show.Related related={ related } />
+                                    </div>
+                                )}
+
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </Main>
+                </section>
+            </div>
+        </>
     );
 }
 

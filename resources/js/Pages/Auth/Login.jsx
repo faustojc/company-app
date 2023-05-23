@@ -1,10 +1,11 @@
-import Main from "@/Pages/Layouts/Main";
 import { useState } from "react";
-import { router, usePage } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 import route from "ziggy-js/src/js";
+import Navbar from "@/Components/Navbar";
+import OffcanvasOrders from "@/Components/OffcanvasOrders";
+import Footer from "@/Components/Footer";
 
-function Login() {
-    const { error } = usePage().props;
+function Login({ error }) {
     const [wasValidated, setWasValidated] = useState(false);
     const [values, setValues] = useState({
         email: '',
@@ -32,12 +33,15 @@ function Login() {
             return;
         }
 
-        router.post(route('login'), values);
+        router.post('/login', values);
     }
 
     return (
         <>
-            <Main>
+            <Navbar />
+            <OffcanvasOrders />
+
+            <div className="container-fluid">
                 <section className="h-100 py-5">
                     <div className="row justify-content-center">
                         <div className="col-md-10 col-lg-5">
@@ -88,7 +92,9 @@ function Login() {
                         </div>
                     </div>
                 </section>
-            </Main>
+            </div>
+
+            <Footer />
         </>
     )
 }

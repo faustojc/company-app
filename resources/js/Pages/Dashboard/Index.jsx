@@ -5,7 +5,7 @@ import {Table} from "react-bootstrap";
 function Index({ products }) {
     function handleDelete(product) {
         if (confirm('Are you sure you want to delete this product?')) {
-            router.delete('admin/dashboard/product' + product.product_id);
+            router.delete(route('admin_product.destroy', {'admin_product': product.product_id}), {'admin_product': product.product_id});
         }
     }
 

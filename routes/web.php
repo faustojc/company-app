@@ -61,6 +61,6 @@ Route::get('/admin/register', [AdminRegisterController::class, 'showRegistration
 Route::post('/admin/register', [AdminRegisterController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
-    Route::resource('/admin_product', AdminProductController::class);
+    Route::resource('/admin/admin_product', AdminProductController::class);
 });
 

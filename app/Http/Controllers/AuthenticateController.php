@@ -53,7 +53,7 @@ class AuthenticateController extends Controller
                 'email.unique' => 'This email address is already registered on our records'
             ]);
 
-            if (Auth::validate($credentials)) {
+            if (Auth::guard('customer')->validate($credentials)) {
                 $customer = new Customer();
                 $customer->username = $request->input('username');
                 $customer->email = $request->input('email');

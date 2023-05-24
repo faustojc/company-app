@@ -71,9 +71,10 @@ function OffcanvasOrders() {
                     <h5 className="offcanvas-title nav-link" id="offcanvasCartLabel">CART LIST</h5>
                     <button className="btn-close" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
+                {auth && 
                 <a href={ route('orders.index') }>
                     <button>VIEW ALL CART</button>
-                </a>
+                </a>}
                 <div className="offcanvas-body">
                     {auth ? <Orders orders={orders} customer={customer} /> : 'You don\'t have any added carts'}
                 </div>

@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OrdersController extends Controller
 {
@@ -50,10 +51,15 @@ class OrdersController extends Controller
         return $product_controller->show($product->product_id);
     }
 
-    public function destroy($order_id): Response
+    public function update(Order $order)
     {
-        Order::destroy($order_id);
+        Order::query()->where('order_id', $order->order_id); // DONT TOUCH!
+    }
 
-        return $this->index();
+    public function destroy($order_id): RedirectResponse
+    {
+        Order::query()->where('order_id', $order_id)->first()->delete();
+
+        return redirect()->route('orders.index');
     }
 }

@@ -10,7 +10,7 @@ function Orders({ orders, customer }) {
     function increment(order) {
         const updatedTotalPrice = (order.quantity + 1) * order.product.price;
 
-        axios.patch('home/orders/${order}', {quantity: order.quantity + 1, total_price: updatedTotalPrice})
+        axios.patch('home/orders/', {quantity: order.quantity + 1, total_price: updatedTotalPrice})
             .then(response => {
                 setCustomerOrders(
                     orders.map(o => (o.customer_id === customer.customer_id && o.product.product_id === order.product_id) ? response.data : o)
@@ -21,7 +21,7 @@ function Orders({ orders, customer }) {
     function decrement(order) {
         const updatedTotalPrice = (order.quantity - 1) * order.product.price;
 
-        axios.patch('home/orders/${order}', {quantity: order.quantity - 1, total_price: updatedTotalPrice})
+        axios.patch('home/orders/', {quantity: order.quantity - 1, total_price: updatedTotalPrice})
             .then(response => {
                 setCustomerOrders(
                     orders.map(o => (o.customer_id === customer.customer_id && o.product.product_id === order.product_id) ? response.data : o)

@@ -59,7 +59,18 @@ function Registration({ errors }) {
             return;
         }
 
-        router.post('/register', values);
+        const formData = new FormData();
+
+        formData.append('firstname', values.firstname);
+        formData.append('lastname', values.lastname);
+        formData.append('username', values.username);
+        formData.append('email', values.email);
+        formData.append('sex', values.sex);
+        formData.append('password', values.password);
+        formData.append('address', values.address);
+        formData.append('region', values.region);
+
+        router.post('/register', formData);
     }
 
     return (
@@ -119,7 +130,7 @@ function Registration({ errors }) {
                                     </select>
                                 </div>
                                 <div className="col-12">
-                                    <button type="submit" className="btn btn-primary rounded-0">Sign up</button>
+                                    <button type="submit" value="Submit" className="btn btn-primary rounded-0">Sign up</button>
                                 </div>
                             </form>
                             <p className="text-center">

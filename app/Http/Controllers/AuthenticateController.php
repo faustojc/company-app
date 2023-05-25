@@ -40,38 +40,37 @@ class AuthenticateController extends Controller
         return redirect()->route('login');
     }
 
-    public function register(Request $request): Response|RedirectResponse
+    public function register(Request $request): RedirectResponse
     {
-        if ($request->isMethod("POST")) {
+        //dd($request);
+        if ($request->isMethod("post")) {
+            //dd($request);
+
             $credentials = $request->validate([
-                'username' => 'required|unique:customer,username',
-                'email' => 'required|email|unique:customer,email',
-                'password' => 'required'
-            ], [
-                'username.unique' => 'This username is already taken',
-                'email.email' => 'Please enter a valid email address',
-                'email.unique' => 'This email address is already registered on our records'
+                'email' => ['required', 'email'],
+                'password' => ['required']
             ]);
 
-            if (Auth::guard('customer')->validate($credentials)) {
-                $customer = new Customer();
-                $customer->username = $request->input('username');
-                $customer->email = $request->input('email');
-                $customer->password = Hash::make($request->input('password'));
-                $customer->firstname = $request->input('firstname');
-                $customer->lastname = $request->input('lastname');
-                $customer->sex = $request->input('sex');
-                $customer->region = $request->input('region');
-                $customer->address = $request->input('address');
-                $customer->save();
+            //dd($request);
 
-                return redirect()->route('login');
-            }
+            $customer = new Customer();
+            $customer->username = $request->input('username');
+            $customer->email = $request->input('email');
+            $customer->password = Hash::make($request->input('password'));
+            $customer->firstname = $request->input('firstname');
+            $customer->lastname = $request->input('lastname');
+            $customer->sex = $request->input('sex');
+            $customer->region = $request->input('region');
+            $customer->address = $request->input('address');
+            $customer->save();
 
-            return Inertia::render('Auth/Registration', ['errors' => 'Something went wrong']);
+            //dd($request);
+
+
+            return redirect()->route('login');
         }
 
-        return Inertia::render('Auth/Registration');
+        return redirect()->route('register');
     }
 
     public function login(Request $request)

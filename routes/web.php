@@ -47,7 +47,7 @@ Route::resource('/products', ProductController::class)
     });
 
 Route::resource('/orders', OrdersController::class)
-    ->except(['create'])
+    ->except(['create', 'show'])
     ->missing(function () {
         return Redirect::route('orders.index');
     });
